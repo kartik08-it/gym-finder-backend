@@ -12,12 +12,13 @@ class LocationSeeder extends Seeder
 {
     public function run(): void
     {
-        $india = Country::create(['name' => 'India', 'iso2' => 'IN', 'phone_code' => '+91']);
+        $india = Country::updateOrCreate(['iso2' => 'IN'], ['name' => 'India', 'phone_code' => '+91']);
 
-        $maharashtra = State::create(['country_id' => $india->id, 'name' => 'Maharashtra', 'code' => 'MH']);
-        $karnataka = State::create(['country_id' => $india->id, 'name' => 'Karnataka', 'code' => 'KA']);
-        $delhi = State::create(['country_id' => $india->id, 'name' => 'Delhi', 'code' => 'DL']);
-        $telangana = State::create(['country_id' => $india->id, 'name' => 'Telangana', 'code' => 'TG']);
+        $maharashtra = State::updateOrCreate(['country_id' => $india->id, 'code' => 'MH'], ['name' => 'Maharashtra']);
+        $karnataka = State::updateOrCreate(['country_id' => $india->id, 'code' => 'KA'], ['name' => 'Karnataka']);
+        $delhi = State::updateOrCreate(['country_id' => $india->id, 'code' => 'DL'], ['name' => 'Delhi']);
+        $telangana = State::updateOrCreate(['country_id' => $india->id, 'code' => 'TG'], ['name' => 'Telangana']);
+        $uttarPradesh = State::updateOrCreate(['country_id' => $india->id, 'code' => 'UP'], ['name' => 'Uttar Pradesh']);
 
         $cities = [
             ['state' => $maharashtra, 'name' => 'Mumbai', 'lat' => 19.0760, 'lng' => 72.8777],
@@ -25,10 +26,15 @@ class LocationSeeder extends Seeder
             ['state' => $karnataka, 'name' => 'Bengaluru', 'lat' => 12.9716, 'lng' => 77.5946],
             ['state' => $delhi, 'name' => 'New Delhi', 'lat' => 28.6139, 'lng' => 77.2090],
             ['state' => $telangana, 'name' => 'Hyderabad', 'lat' => 17.3850, 'lng' => 78.4867],
+            ['state' => $uttarPradesh, 'name' => 'Noida', 'lat' => 28.5355, 'lng' => 77.3910],
+            ['state' => $uttarPradesh, 'name' => 'Gurugram', 'lat' => 28.4595, 'lng' => 77.0266],
+            ['state' => $uttarPradesh, 'name' => 'Greater Noida', 'lat' => 28.4744, 'lng' => 77.5030],
+            ['state' => $uttarPradesh, 'name' => 'Meerut', 'lat' => 28.9845, 'lng' => 77.7064],
+            ['state' => $uttarPradesh, 'name' => 'Muzaffarnagar', 'lat' => 29.4727, 'lng' => 77.7085],
         ];
 
         foreach ($cities as $c) {
-            City::create([
+            City::updateOrCreate(['slug' => Str::slug($c['name'])], [
                 'state_id' => $c['state']->id,
                 'name' => $c['name'],
                 'slug' => Str::slug($c['name']),
