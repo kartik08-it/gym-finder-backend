@@ -21,6 +21,7 @@ class Gym extends Model
         'opening_time', 'closing_time', 'is_24x7', 'ladies_only', 'gender_preference',
         'trainer_count', 'crowd_level', 'peak_hours', 'starting_price',
         'status', 'rejection_reason', 'is_verified', 'is_featured', 'approved_at',
+        'source', 'source_id', 'source_url', 'last_synced_at',
     ];
 
     protected function casts(): array

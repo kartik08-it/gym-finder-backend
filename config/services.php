@@ -15,6 +15,9 @@ return [
         'url' => env('NOMINATIM_URL', 'https://nominatim.openstreetmap.org'),
         'user_agent' => env('NOMINATIM_USER_AGENT', 'GymFinder/1.0'),
     ],
+    'gym_import' => [
+        'owner_email' => env('GYM_IMPORT_OWNER_EMAIL', 'admin@gymfinder.app'),
+    ],
     'fcm' => [
         'server_key' => env('FCM_SERVER_KEY'),
     ],
